@@ -21,6 +21,9 @@ var VaultName = "pop-os"
 var ArchiveDescription = "my pc backup"
 
 func main() {
+
+	cmd.Execute()
+
 	channel := make(chan []byte)
 
 	context, cancel := context.WithCancel(context.Background())
@@ -86,7 +89,7 @@ func SendToGlacier(ctx context.Context, ch <-chan []byte, awsClient *glacier.Cli
 
 		length := string(lengthInt)
 
-		var UploadPartParams = &glacier.UploadMultipartPartInput{
+		UploadPartParams := &glacier.UploadMultipartPartInput{
 			AccountId: &AccountID,
 			VaultName: &VaultName,
 			Body:      reader,
